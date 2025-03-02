@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow Pro | Modern Task Management</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="nav-brand">
+                <i class="fas fa-layer-group"></i>
+                <span>TaskFlow Pro</span>
+            </a>
+            <div class="nav-profile">
+                <span class="workspace-name">My Workspace</span>
+                <div class="avatar" title="Your Profile">PS</div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="task-form-wrapper">
+            <div class="task-form">
+                <div class="form-header">
+                    <h2>Create Task</h2>
+                    <p class="form-subtitle">Add a new task to your workflow</p>
+                </div>
+                
+                <div class="form-content">
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <input type="text" id="taskInput" placeholder="What needs to be done?" autocomplete="off">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="text" id="pocInput" placeholder="Point of Contact" autocomplete="off">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="select-wrapper">
+                            <select id="taskCategory">
+                                <option value="today">Today</option>
+                                <option value="thisWeek">This Week</option>
+                                <option value="nextWeek">Next Week</option>
+                            </select>
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <div class="select-wrapper">
+                            <select id="taskFunction">
+                                <option value="insideSales">Inside Sales</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="performanceMarketing">Performance Marketing</option>
+                            </select>
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="select-wrapper">
+                            <select id="taskPriority">
+                                <option value="high">High Priority</option>
+                                <option value="medium">Medium Priority</option>
+                                <option value="low">Low Priority</option>
+                            </select>
+                            <i class="fas fa-flag"></i>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="date" id="dueDate">
+                            <i class="far fa-calendar-alt"></i>
+                        </div>
+                        <button onclick="addTask()" class="add-btn">
+                            <i class="fas fa-plus"></i>
+                            Add Task
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="board-header">
+            <h2>Task Board</h2>
+            <div class="view-options">
+                <button class="view-btn active">
+                    <i class="fas fa-th-large"></i>
+                    Board View
+                </button>
+            </div>
+        </div>
+
+        <div class="task-sections">
+            <div class="task-section" data-category="today">
+                <div class="section-header">
+                    <h3><i class="fas fa-sun"></i> Today</h3>
+                    <span class="task-count" id="today-count">0</span>
+                </div>
+                <div class="function-groups" id="todayTasks">
+                    <div class="function-group" id="today-insideSales">
+                        <div class="group-header">
+                            <h4><i class="fas fa-briefcase"></i> Inside Sales</h4>
+                            <span class="group-count">0</span>
+                        </div>
+                        <div class="task-list" data-function="insideSales"></div>
+                    </div>
+                    <div class="function-group" id="today-marketing">
+                        <div class="group-header">
+                            <h4><i class="fas fa-bullhorn"></i> Marketing</h4>
+                            <span class="group-count">0</span>
+                        </div>
+                        <div class="task-list" data-function="marketing"></div>
+                    </div>
+                    <div class="function-group" id="today-performanceMarketing">
+                        <div class="group-header">
+                            <h4><i class="fas fa-chart-line"></i> Performance Marketing</h4>
+                            <span class="group-count">0</span>
+                        </div>
+                        <div class="task-list" data-function="performanceMarketing"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-section" data-category="thisWeek">
+                <div class="section-header">
+                    <h3><i class="fas fa-calendar-week"></i> This Week</h3>
+                    <span class="task-count" id="thisWeek-count">0</span>
+                </div>
+                <div class="function-groups" id="thisWeekTasks">
+                    <div class="function-group" id="thisWeek-insideSales">
+                        <div class="group-header">
+                            <h4><i class="fas fa-briefcase"></i> Inside Sales</h4>
+                            <span class="group-count">0</span>
+                        </div>
+                        <div class="task-list" data-function="insideSales"></div>
+                    </div>
+                    <div class="function-group" id="thisWeek-marketing">
+                        <div class="group-header">
+                            <h4><i class="fas fa-bullhorn"></i> Marketing</h4>
+                            <span class="group-count">0</span>
+                        </div>
+                        <div class="task-list" data-function="marketing"></div>
+                    </div>
+                    <div class="function-group" id="thisWeek-performanceMarketing">
+                        <div class="group-header">
+                            <h4><i class="fas fa-chart-line"></i> Performance Marketing</h4>
+                            <span class="group-count">0</span>
+                        </div>
+                        <div class="task-list" data-function="performanceMarketing"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-section" data-category="nextWeek">
+                <div class="section-header">
+                    <h3><i class="fas fa-calendar-alt"></i> Next Week</h3>
+                    <span class="task-count" id="nextWeek-count">0</span>
+                </div>
+                <div class="function-groups" id="nextWeekTasks">
+                    <div class="function-group" id="nextWeek-insideSales">
+                        <div class="group-header">
+                            <h4><i class="fas fa-briefcase"></i> Inside Sales</h4>
+                            <span class="group-count">0</span>
+                        </div>
+                        <div class="task-list" data-function="insideSales"></div>
+                    </div>
+                    <div class="function-group" id="nextWeek-marketing">
+                        <div class="group-header">
+                            <h4><i class="fas fa-bullhorn"></i> Marketing</h4>
+                            <span class="group-count">0</span>
+                        </div>
+                        <div class="task-list" data-function="marketing"></div>
+                    </div>
+                    <div class="function-group" id="nextWeek-performanceMarketing">
+                        <div class="group-header">
+                            <h4><i class="fas fa-chart-line"></i> Performance Marketing</h4>
+                            <span class="group-count">0</span>
+                        </div>
+                        <div class="task-list" data-function="performanceMarketing"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
